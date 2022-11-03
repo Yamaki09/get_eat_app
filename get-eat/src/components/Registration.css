@@ -1,16 +1,19 @@
+body{
+    background: #bdc3c7;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right,#2c3e50, #bdc3c7);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right,#2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 
 .form{
-    background-color: white;
-    width: 350px;
-    height: 250px;
+    background-color: lightslategray;
+    border-radius: 5px;
+    width: 550px;
     margin: 20px auto;
-    padding: 10px;
+    padding: 20px;
+    /* height: 600px; */
 }
 
 .form-body{
-    border: solid rgb(13, 192, 192);
-    border-width: 5px;
-    background-color: white;
     text-align: left;
     padding: 20px 10px;
 }
@@ -21,17 +24,14 @@
 
 .form__label{
     width: 40%;
+    color: white;
 }
 
 .form_input{
     width: 60%;
-}
-
-.btn { /* Green */
-    font-size: 20px;
+    color: darkgrey;
 }
 
 .footer{
-    margin-top: 10px;
     text-align: center;
 }
