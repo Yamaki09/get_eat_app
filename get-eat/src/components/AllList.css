@@ -1,0 +1,11 @@
+.list {
+	display: flex;
+	justify-content: right;
+	border-style: double;
+	margin: auto;
+	margin-left: 40%;
+}
+
+.lists:hover {
+	background-color: aqua;
+}

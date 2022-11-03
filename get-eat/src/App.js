@@ -6,18 +6,11 @@ import Navigation from './components/Navigation';
 import Registration from './components/Registration';
 import SingleList from './components/SingleList';
 import Container from 'react-bootstrap/Container';
-
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link,
-  Navigate,
-} from 'react-router-dom';
+import { Routes, Route, Link, Navigate } from 'react-router-dom';
 
 export default function App() {
   return (
-    <Router>
+    <>
       {/* this imports the default css for bootstrap 
       it is required for things like striped bordered hover variant="dark" */}
       <link
@@ -30,12 +23,12 @@ export default function App() {
         <Navigation />
         <Routes>
           <Route exact path='/' element={<Home />} />
-          <Route path='/registration' element={<Registration />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/single-list' element={<SingleList />} />
-          <Route path='/all-list' element={<AllList />} />
+          <Route exact path='/registration' element={<Registration />} />
+          <Route exact path='/login' element={<Login />} />
+          <Route exact path='/single-list' element={<SingleList />} />
+          <Route exact path='/all-list' element={<AllList />} />
         </Routes>
       </Container>
-    </Router>
+    </>
   );
 }
