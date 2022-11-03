@@ -8,13 +8,7 @@ import SingleList from "./components/SingleList";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import {
-	BrowserRouter as Router,
-	Routes,
-	Route,
-	Link,
-	Navigate,
-} from "react-router-dom";
+import { Routes, Route, Link, Navigate } from "react-router-dom";
 
 export default function App() {
 	return (
@@ -31,10 +25,10 @@ export default function App() {
 				<Navbar />
 				<Routes>
 					<Route exact path="/" element={<Home />} />
-					<Route path="/registration" element={<Registration />} />
-					<Route path="/login" element={<Login />} />
-					<Route path="/single-list" element={<SingleList />} />
-					<Route path="/all-list" element={<AllList />} />
+					<Route exact path="/registration" element={<Registration />} />
+					<Route exact path="/login" element={<Login />} />
+					<Route exact path="/single-list" element={<SingleList />} />
+					<Route exact path="/all-list" element={<AllList />} />
 				</Routes>
 			</Container>
 		</>
