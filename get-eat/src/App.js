@@ -2,12 +2,11 @@ import React from 'react';
 import AllList from './components/AllList';
 import Home from './components/Home';
 import Login from './components/Login';
-import Navbar from './components/Navbar';
+import Navigation from './components/Navigation';
 import Registration from './components/Registration';
 import SingleList from './components/SingleList';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -28,7 +27,7 @@ export default function App() {
         crossorigin='anonymous'
       />
       <Container fluid>
-        <Navbar />
+        <Navigation />
         <Routes>
           <Route exact path='/' element={<Home />} />
           <Route path='/registration' element={<Registration />} />
