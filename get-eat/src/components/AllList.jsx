@@ -1,48 +1,44 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import "../App.css";
-import { Button } from "react-bootstrap";
-import ListGroup from "react-bootstrap/ListGroup";
+import * as React from "react";
+import { useState, useEffect } from "react";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import ImageIcon from "@mui/icons-material/Image";
+import WorkIcon from "@mui/icons-material/Work";
+import BeachAccessIcon from "@mui/icons-material/BeachAccess";
+import Icon from "@mdi/react";
+import { mdiCartOutline } from "@mdi/js";
+import "./AllList.css";
 
-export default function Login(props) {
-	const [listName, setListName] = useState("");
-	const { setLists, lists, setCurrentView, setSelectedList, selectedList } =
-		props;
+const tempList = [
+	{ name: "grocery for party", date: "11/03/2022" },
+	{ name: "grocery for this week's menu", date: "10/30/2022" },
+	{ name: "grocery for emergency supply", date: "10/25/2022" },
+];
 
+export default function AllList() {
+	const [lists, setLists] = useState([]);
+	useEffect(() => {
+		setLists(tempList);
+	}, []);
 	return (
-		<div className="List">
-			<form
-				onSubmit={async (e) => {
-					e.preventDefault();
-					let data = await axios.post("/api/lists/add", {
-						listName,
-					});
-					setListName("");
-				}}
-			>
-				<input
-					type="text"
-					className="add-list-box"
-					placeholder="List Name"
-					value={listName}
-					onChange={(e) => {
-						setListName(e.target.value);
-					}}
-				></input>
-				<Button variant="outline-dark" type="submit">
-					Add List
-				</Button>
-			</form>
-			{lists.map((listData, index) => (
-				<div
-					onClick={() => {
-						setCurrentView("singleList");
-						setSelectedList(lists[index]);
-					}}
-				>
-					{listData.listName}
-				</div>
-			))}
-		</div>
+		<List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+			{lists.map((obj) => {
+				return (
+					<>
+						<ListItem className="lists">
+							<ListItemAvatar>
+								<Avatar>
+									<Icon path={mdiCartOutline} />
+								</Avatar>
+							</ListItemAvatar>
+							<ListItemText primary={obj.name} secondary={obj.date} />
+						</ListItem>
+					</>
+				);
+			})}
+		</List>
 	);
 }
