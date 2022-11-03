@@ -25,5 +25,6 @@ export default function App() {
 				<Route path="/all-list" element={<AllList />} />
 			</Routes>
 		</Router>
+		
 	);
 }

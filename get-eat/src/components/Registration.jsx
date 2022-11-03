@@ -1,4 +1,5 @@
 import React, {useState, setState} from 'react';
+import "./Registration.css"
 
 export default function Registration() {
     
@@ -56,8 +57,8 @@ export default function Registration() {
                     <input className="form__input" type="password" id="confirmPassword" value={confirmPassword} onChange = {(e) => handleInputChange(e)} placeholder="Confirm Password"/>
                 </div>
             </div>
-            <div class="footer">
-                <button onClick={()=>handleSubmit()} type="submit" class="btn">Register</button>
+            <div className="footer">
+                <button className="btn" onClick={()=>handleSubmit()} type="submit" class="btn">Register</button>
             </div>
         </div>
     )       
