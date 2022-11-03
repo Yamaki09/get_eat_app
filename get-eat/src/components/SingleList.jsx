@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 const tableHeaders = ["Item Name", "Quantity", "Purchased"];
 const dummyData = [
 	{ item_name: "banana", quantity: "1", purchased: true },
-	{ item_name: "apple", quantity: "1", purchased: true },
+	{ item_name: "apple", quantity: "1", purchased: false },
 	{ item_name: "pear", quantity: "1", purchased: true },];
 
 export default function SingleList() {
@@ -41,6 +41,7 @@ export default function SingleList() {
 								<Form.Check
 									type="checkbox"
 									onChange={clickCheckbox}
+									checked={obj.purchased}
 								/>
 							</td>
 						</tr>
