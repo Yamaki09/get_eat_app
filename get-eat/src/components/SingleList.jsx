@@ -2,20 +2,34 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
+import Button from "react-bootstrap/Button";
+
+const API_URL = process.env.REACT_APP_API_URL;
+
+// temp variable for testing
+const listid = 1;
 
 const tableHeaders = ["Item Name", "Quantity", "Purchased"];
 const dummyData = [
-	{ item_name: "banana", quantity: "1", purchased: true },
-	{ item_name: "apple", quantity: "1", purchased: false },
-	{ item_name: "pear", quantity: "1", purchased: true },];
+	{ itemName: "banana", quantity: "1", purchased: true },
+	{ itemName: "apple", quantity: "1", purchased: false },
+	{ itemName: "pear", quantity: "1", purchased: true },];
 
 export default function SingleList() {
 
 	const [items, setItems] = useState(dummyData);
 
 	useEffect(() => {
-		// useEffect to setItems on load
-		console.log("TODO: fetch list data")
+		(async () => {
+			try {
+				const rawData = await fetch(`${API_URL}/list/${listid}/items`)
+				const itemsArray = await rawData.json();
+				setItems(itemsArray);
+			} catch (e) {
+				console.error(e);
+			}
+		}
+		)()
 	}, [])
 
 	function clickCheckbox() {
@@ -23,31 +37,36 @@ export default function SingleList() {
 	}
 
 	return (
-		<Table striped bordered hover variant="dark">
-			<thead>
-				<tr>
-					{tableHeaders.map((header) => {
-						return <th key={header}>{header}</th>
+		<>
+			<Table striped bordered hover variant="dark">
+				<thead>
+					<tr>
+						{tableHeaders.map((header) => {
+							return <th key={header}>{header}</th>
+						})}
+					</tr>
+				</thead>
+				<tbody>
+					{items.map(obj => {
+						return (
+							<tr key={obj.itemName}>
+								<td>{obj.itemName}</td>
+								<td>{obj.quantity}</td>
+								<td>
+									<Form.Check
+										type="checkbox"
+										onChange={clickCheckbox}
+										checked={obj.purchased}
+									/>
+								</td>
+							</tr>
+						)
 					})}
-				</tr>
-			</thead>
-			<tbody>
-				{items.map(obj => {
-					return (
-						<tr key={obj.item_name}>
-							<td>{obj.item_name}</td>
-							<td>{obj.quantity}</td>
-							<td>
-								<Form.Check
-									type="checkbox"
-									onChange={clickCheckbox}
-									checked={obj.purchased}
-								/>
-							</td>
-						</tr>
-					)
-				})}
-			</tbody>
-		</Table>
+				</tbody>
+			</Table>
+			<Button variant="dark">
+				New Item
+			</Button>
+		</>
 	);
 }
