@@ -11,6 +11,7 @@ import BeachAccessIcon from "@mui/icons-material/BeachAccess";
 import Icon from "@mdi/react";
 import { mdiCartOutline } from "@mdi/js";
 import "./AllList.css";
+import ListGroup from "react-bootstrap/ListGroup";
 
 const tempList = [
 	{ name: "grocery for party", date: "11/03/2022" },
@@ -18,27 +19,51 @@ const tempList = [
 	{ name: "grocery for emergency supply", date: "10/25/2022" },
 ];
 
-export default function AllList() {
+export default function DefaultExample() {
 	const [lists, setLists] = useState([]);
 	useEffect(() => {
 		setLists(tempList);
 	}, []);
 	return (
-		<List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+		<ListGroup className="list">
 			{lists.map((obj) => {
 				return (
 					<>
-						<ListItem className="lists">
-							<ListItemAvatar>
-								<Avatar>
-									<Icon path={mdiCartOutline} />
-								</Avatar>
-							</ListItemAvatar>
-							<ListItemText primary={obj.name} secondary={obj.date} />
-						</ListItem>
+						<ListGroup.Item
+							className="item-list"
+							onClick={() => console.log("hello")}
+						>{`${obj.name}`}</ListGroup.Item>
 					</>
 				);
 			})}
-		</List>
+		</ListGroup>
 	);
 }
+
+// export default function AllList() {
+// 	const [lists, setLists] = useState([]);
+// 	useEffect(() => {
+// 		setLists(tempList);
+// 	}, []);
+// 	return (
+// 		<List
+// 			className="list-table"
+// 			sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+// 		>
+// 			{lists.map((obj) => {
+// 				return (
+// 					<>
+// 						<ListItem className="lists">
+// 							<ListItemAvatar>
+// 								<Avatar>
+// 									<Icon path={mdiCartOutline} />
+// 								</Avatar>
+// 							</ListItemAvatar>
+// 							<ListItemText primary={obj.name} secondary={obj.date} />
+// 						</ListItem>
+// 					</>
+// 				);
+// 			})}
+// 		</List>
+// 	);
+// }

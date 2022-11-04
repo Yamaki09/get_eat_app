@@ -1,4 +1,5 @@
 import React, { useState, setState } from "react";
+import "./Registration.css";
 
 export default function Registration() {
 	const [firstName, setFirstName] = useState(null);
@@ -100,7 +101,7 @@ export default function Registration() {
 					/>
 				</div>
 			</div>
-			<div class="footer">
+			<div className="footer">
 				<button onClick={() => handleSubmit()} type="submit" class="btn">
 					Register
 				</button>
