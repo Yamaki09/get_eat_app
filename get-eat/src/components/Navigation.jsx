@@ -12,7 +12,7 @@ export default function NavigationBar() {
 			<Container fluid>
 				<Navbar.Brand href="./all-list">Get Eat</Navbar.Brand>
 				<Nav className="me-auto">
-					<Nav.Link href="./all-list">Home</Nav.Link>
+					<Nav.Link href="./all-list">My Lists</Nav.Link>
 					<Nav.Link href="./login">login</Nav.Link>
 					<Button variant="dark">Logout</Button>
 				</Nav>
