@@ -9,7 +9,10 @@ const API_URL = process.env.REACT_APP_API_URL;
 // temp variable for testing
 const listid = 1;
 
+// Headers to be array.mapped to the items table.
 const tableHeaders = ["Item Name", "Quantity", "Purchased"];
+
+// temporary data for pre-api work.
 const dummyData = [
 	{ itemName: "banana", quantity: "1", purchased: true },
 	{ itemName: "apple", quantity: "1", purchased: false },
@@ -19,6 +22,7 @@ export default function SingleList() {
 
 	const [items, setItems] = useState(dummyData);
 
+	// useEffect to request data for the current listid
 	useEffect(() => {
 		(async () => {
 			try {
@@ -32,8 +36,9 @@ export default function SingleList() {
 		)()
 	}, [])
 
+	// api call to change the Checkbox state
 	function clickCheckbox() {
-		alert("TODO: checkbox api call");
+		alert("TODO: checkbox api call"); // 
 	}
 
 	return (
