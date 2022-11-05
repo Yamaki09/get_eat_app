@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import Table from 'react-bootstrap/Table';
-import Form from 'react-bootstrap/Form';
+import Table from "react-bootstrap/Table";
+import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import NewItemModal from "./NewItemModal";
 
@@ -14,26 +14,25 @@ const tableHeaders = ["Item Name", "Quantity", "Purchased", "Edit"];
 const dummyData = [
 	{ itemName: "banana", quantity: "1", purchased: true },
 	{ itemName: "apple", quantity: "1", purchased: false },
-	{ itemName: "pear", quantity: "1", purchased: true },];
+	{ itemName: "pear", quantity: "1", purchased: true },
+];
 
 export default function SingleList({ listid }) {
-
 	const [items, setItems] = useState(dummyData);
 
 	// useEffect to request data for the current listid
 	useEffect(() => {
 		(async () => {
 			try {
-				const rawData = await fetch(`${API_URL}/list/${listid || 1}/items`)
+				const rawData = await fetch(`${API_URL}/list/${listid || 1}/items`);
 				const itemsArray = await rawData.json();
 				console.log(itemsArray);
 				setItems(itemsArray);
 			} catch (e) {
 				console.error(e);
 			}
-		}
-		)()
-	}, [listid])
+		})();
+	}, [listid]);
 
 	return (
 		<>
@@ -41,7 +40,7 @@ export default function SingleList({ listid }) {
 				<thead>
 					<tr>
 						{tableHeaders.map((header, index) => {
-							return <th key={header + index}>{header}</th>
+							return <th key={header + index}>{header}</th>;
 						})}
 					</tr>
 				</thead>
@@ -62,7 +61,7 @@ export default function SingleList({ listid }) {
 									<Button variant="dark"> edit </Button>
 								</td>
 							</tr>
-						)
+						);
 					})}
 				</tbody>
 			</Table>

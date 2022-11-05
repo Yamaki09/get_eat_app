@@ -1,20 +1,18 @@
 import React, { useState, setState } from "react";
 import "./Registration.css";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 export default function Registration() {
-	const [firstName, setFirstName] = useState(null);
-	const [lastName, setLastName] = useState(null);
+	const [userName, setUserName] = useState(null);
 	const [email, setEmail] = useState(null);
 	const [password, setPassword] = useState(null);
 	const [confirmPassword, setConfirmPassword] = useState(null);
 
 	const handleInputChange = (e) => {
 		const { id, value } = e.target;
-		if (id === "firstName") {
-			setFirstName(value);
-		}
-		if (id === "lastName") {
-			setLastName(value);
+		if (id === "userName") {
+			setUserName(value);
 		}
 		if (id === "email") {
 			setEmail(value);
@@ -27,38 +25,38 @@ export default function Registration() {
 		}
 	};
 
-	const handleSubmit = () => {
-		console.log(firstName, lastName, email, password, confirmPassword);
+	const handleSubmit = async () => {
+		const body = {
+			userName: userName,
+			userEmail: email,
+			userPassword: password,
+		};
+		try {
+			let data = await fetch(`${API_URL}/user/signup`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(body),
+			});
+		} catch (e) {
+			console.error(e);
+		}
 	};
-
 	return (
 		<div className="form">
 			<div className="form-body">
 				<div className="username">
-					<label className="form__label" for="firstName">
-						First Name{" "}
+					<label className="form__label" for="userName">
+						User name{" "}
 					</label>
 					<input
 						className="form__input"
 						type="text"
-						value={firstName}
+						value={userName}
 						onChange={(e) => handleInputChange(e)}
-						id="firstName"
-						placeholder="First Name"
-					/>
-				</div>
-				<div className="lastname">
-					<label className="form__label" for="lastName">
-						Last Name{" "}
-					</label>
-					<input
-						type="text"
-						name=""
-						id="lastName"
-						value={lastName}
-						className="form__input"
-						onChange={(e) => handleInputChange(e)}
-						placeholder="LastName"
+						id="userName"
+						placeholder="User name"
 					/>
 				</div>
 				<div className="email">
