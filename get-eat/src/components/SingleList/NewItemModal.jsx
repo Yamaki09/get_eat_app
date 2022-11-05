@@ -5,29 +5,19 @@ import Form from 'react-bootstrap/Form';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-export default function NewItemModal({ listid }) {
+export default function NewItemModal({ listid, items, setItems }) {
 
   // modal states
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  // item states
-
-  const [itemName, setItemName] = useState("");
-  const [quantity, setQuantity] = useState("");
-
-  const handleItemName = (e) => setItemName(e.value);
-  const handleQuantity = (e) => setQuantity(e.value);
-
   function handleSubmit(e) {
     e.preventDefault();
-
     (async () => {
       try {
-        const body = JSON.stringify({ listid, itemName, quantity, purchaseStatus: false });
-        console.log(body);
+        // not sure what the best way to grab values from a bootstrap list is, but this works for now.
+        const body = JSON.stringify({ listid, itemName: e.target[0].value, quantity: e.target[1].value, purchaseStatus: false });
         const rawData = await fetch(`${API_URL}/list/item`, {
           method: "POST",
           headers: {
@@ -35,7 +25,10 @@ export default function NewItemModal({ listid }) {
           },
           body: body,
         })
-        console.log(rawData);
+        let data = await rawData.json();
+        data = { itemName: data.item_name, quantity: data.quantity, purchased: data.purchased };
+        handleClose()
+        setItems([...items, data]);
       } catch (e) {
         console.error(e);
       }
@@ -47,7 +40,6 @@ export default function NewItemModal({ listid }) {
       <Button variant="dark" onClick={handleShow}>
         New Item
       </Button>
-
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>New Item</Modal.Title>
@@ -56,11 +48,11 @@ export default function NewItemModal({ listid }) {
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formItemName">
               <Form.Label>Item Name</Form.Label>
-              <Form.Control placeholder="item name" value={itemName} onChange={handleItemName} />
+              <Form.Control placeholder="item name" />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formQuantity">
               <Form.Label>Quantity</Form.Label>
-              <Form.Control placeholder="quantity" value={quantity} onChange={handleQuantity} />
+              <Form.Control placeholder="quantity" />
             </Form.Group>
             <Button type="submit">
               Submit
@@ -74,3 +66,6 @@ export default function NewItemModal({ listid }) {
     </>
   );
 }
+
+// value={itemName} onChange={handleItemName} 
+//value={quantity} onChange={handleQuantity}

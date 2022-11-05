@@ -26,28 +26,29 @@ export default function SingleList({ listid }) {
 			try {
 				const rawData = await fetch(`${API_URL}/list/${listid || 1}/items`)
 				const itemsArray = await rawData.json();
+				console.log(itemsArray);
 				setItems(itemsArray);
 			} catch (e) {
 				console.error(e);
 			}
 		}
 		)()
-	}, [])
+	}, [listid])
 
 	return (
 		<>
 			<Table striped bordered hover variant="dark">
 				<thead>
 					<tr>
-						{tableHeaders.map((header) => {
-							return <th key={header}>{header}</th>
+						{tableHeaders.map((header, index) => {
+							return <th key={header + index}>{header}</th>
 						})}
 					</tr>
 				</thead>
 				<tbody>
-					{items.map(obj => {
+					{items.map((obj, index) => {
 						return (
-							<tr key={obj.itemName}>
+							<tr key={obj.itemName + index}>
 								<td>{obj.itemName}</td>
 								<td>{obj.quantity}</td>
 								<td>
@@ -65,7 +66,7 @@ export default function SingleList({ listid }) {
 					})}
 				</tbody>
 			</Table>
-			<NewItemModal listid />
+			<NewItemModal listid={listid} items={items} setItems={setItems} />
 		</>
 	);
 }
