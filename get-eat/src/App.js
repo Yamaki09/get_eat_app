@@ -4,7 +4,7 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Navigation from './components/Navigation';
 import Registration from './components/Registration';
-import SingleList from './components/SingleList';
+import SingleList from './components/SingleList/SingleList';
 import Container from 'react-bootstrap/Container';
 import { Routes, Route, Link, Navigate } from 'react-router-dom';
 
