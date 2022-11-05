@@ -3,14 +3,12 @@ import { useState, useEffect } from "react";
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
 import Button from "react-bootstrap/Button";
+import NewItemModal from "./NewItemModal";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-// temp variable for testing
-const listid = 1;
-
 // Headers to be array.mapped to the items table.
-const tableHeaders = ["Item Name", "Quantity", "Purchased"];
+const tableHeaders = ["Item Name", "Quantity", "Purchased", "Edit"];
 
 // temporary data for pre-api work.
 const dummyData = [
@@ -18,7 +16,10 @@ const dummyData = [
 	{ itemName: "apple", quantity: "1", purchased: false },
 	{ itemName: "pear", quantity: "1", purchased: true },];
 
-export default function SingleList() {
+export default function SingleList({ listid }) {
+
+	// hardcoding until all lists view can pass prop to here
+	listid = 1;
 
 	const [items, setItems] = useState(dummyData);
 
@@ -26,7 +27,7 @@ export default function SingleList() {
 	useEffect(() => {
 		(async () => {
 			try {
-				const rawData = await fetch(`${API_URL}/list/${listid}/items`)
+				const rawData = await fetch(`${API_URL}/list/${listid || 1}/items`)
 				const itemsArray = await rawData.json();
 				setItems(itemsArray);
 			} catch (e) {
@@ -35,11 +36,6 @@ export default function SingleList() {
 		}
 		)()
 	}, [])
-
-	// api call to change the Checkbox state
-	function clickCheckbox() {
-		alert("TODO: checkbox api call"); // 
-	}
 
 	return (
 		<>
@@ -59,19 +55,20 @@ export default function SingleList() {
 								<td>{obj.quantity}</td>
 								<td>
 									<Form.Check
+										disabled
 										type="checkbox"
-										onChange={clickCheckbox}
 										checked={obj.purchased}
 									/>
+								</td>
+								<td>
+									<Button variant="dark"> edit </Button>
 								</td>
 							</tr>
 						)
 					})}
 				</tbody>
 			</Table>
-			<Button variant="dark">
-				New Item
-			</Button>
+			<NewItemModal listid />
 		</>
 	);
 }
