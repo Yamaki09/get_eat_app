@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AllList from './components/AllList';
 import Home from './components/Home';
 import Login from './components/Login';
@@ -9,6 +9,7 @@ import Container from 'react-bootstrap/Container';
 import { Routes, Route, Link, Navigate } from 'react-router-dom';
 
 export default function App() {
+  const [listid, setListid] = useState(null);
   return (
     <>
       {/* this imports the default css for bootstrap 
@@ -25,8 +26,16 @@ export default function App() {
           <Route exact path='/' element={<Home />} />
           <Route exact path='/registration' element={<Registration />} />
           <Route exact path='/login' element={<Login />} />
-          <Route exact path='/single-list' element={<SingleList />} />
-          <Route exact path='/all-list' element={<AllList />} />
+          <Route
+            exact
+            path='/single-list'
+            element={<SingleList listid={listid} />}
+          />
+          <Route
+            exact
+            path='/all-list'
+            element={<AllList setListid={setListid} />}
+          />
         </Routes>
       </Container>
     </>

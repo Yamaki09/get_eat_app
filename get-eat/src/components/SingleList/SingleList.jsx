@@ -18,9 +18,6 @@ const dummyData = [
 
 export default function SingleList({ listid }) {
 
-	// hardcoding until all lists view can pass prop to here
-	listid = 1;
-
 	const [items, setItems] = useState(dummyData);
 
 	// useEffect to request data for the current listid

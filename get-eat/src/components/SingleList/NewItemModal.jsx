@@ -27,6 +27,7 @@ export default function NewItemModal({ listid }) {
     (async () => {
       try {
         const body = JSON.stringify({ listid, itemName, quantity, purchaseStatus: false });
+        console.log(body);
         const rawData = await fetch(`${API_URL}/list/item`, {
           method: "POST",
           headers: {
