@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import NewItemModal from "./NewItemModal";
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = process.env.REACT_APP_API_URL || "https://get-eat-api.onrender.com/";
 
 // Headers to be array.mapped to the items table.
 const tableHeaders = ["Item Name", "Quantity", "Purchased", "Edit"];

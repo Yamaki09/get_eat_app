@@ -1,7 +1,7 @@
 import React, { useState, setState } from "react";
 import "./Registration.css";
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = process.env.REACT_APP_API_URL || "https://get-eat-api.onrender.com/"
 
 export default function Registration() {
 	const [userName, setUserName] = useState(null);

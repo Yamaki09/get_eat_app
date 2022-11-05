@@ -3,7 +3,7 @@ import "../App.css";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = process.env.REACT_APP_API_URL || "https://get-eat-api.onrender.com/";
 
 export default function Login() {
 
