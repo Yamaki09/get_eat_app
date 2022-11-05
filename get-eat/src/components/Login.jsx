@@ -1,10 +1,13 @@
 import React from "react";
 import "../App.css";
 import { Button, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
 export default function Login() {
+
+	const navigate = useNavigate();
 
 	function handleSubmit(e) {
 		e.preventDefault();
@@ -23,6 +26,7 @@ export default function Login() {
 				})
 				const data = await rawData.json();
 				localStorage.setItem("userid", data.userId)
+				navigate(`/all-list/`);
 			} catch (e) {
 				console.error(e);
 			}
