@@ -6,7 +6,7 @@ import axios from "axios";
 import { Button } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
 
-const API_URL = process.env.REACT_APP_API_URL || "https://get-eat-api.onrender.com/";
+const API_URL = process.env.REACT_APP_API_URL || "https://get-eat-api.onrender.com";
 
 export default function AllList({ setListid }) {
 	const [lists, setLists] = useState([]);
